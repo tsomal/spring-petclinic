@@ -10,7 +10,7 @@ node {
         docker.build("maven-build")
    }
    
-   stage('Run Maven Conatiner') {
+   stage('Run Maven Container') {
        
         //Remove maven-build-container if it exisits
         sh " docker rm -f maven-build-container"
