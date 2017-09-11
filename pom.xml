@@ -27,8 +27,8 @@
     <webjars-jquery.version>2.2.4</webjars-jquery.version>
     <wro4j.version>1.8.0</wro4j.version>
     <thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
-
     <cobertura.version>2.7</cobertura.version>
+   <docker.image.prefix>petclinic</docker.image.prefix>
 
   </properties>
 
@@ -206,7 +206,24 @@
           </dependency>
         </dependencies>
       </plugin>
+      <plugin>
+          <groupId>com.spotify</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.4.11</version>
+          <configuration>
+              <imageName>${docker.image.prefix}:${project.version}</imageName>
+              <dockerDirectory>src/main/docker</dockerDirectory>
+              <resources>
+                  <resource>
+                      <targetPath>/</targetPath>
+                      <directory>${project.build.directory}</directory>
+                      <include>${project.build.finalName}.jar</include>
+                  </resource>
+              </resources>
+          </configuration>
+      </plugin>
     </plugins>
+    
   </build>
   <reporting>
     <plugins>
